@@ -1,0 +1,14 @@
+import React from 'react';
+import Snackbar from '@material-ui/core/Snackbar';
+import MuiAlert from '@material-ui/lab/Alert';
+
+export default (props) => {
+
+  	return (
+  		<Snackbar open={props.open} autoHideDuration={props.duration} onClose={props.onClose}>
+			<MuiAlert onClose={props.onClose} elevation={6} variant="filled" severity={props.severity}>
+				{props.message}
+			</MuiAlert>
+		</Snackbar>
+  	);
+}
