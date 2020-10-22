@@ -11,7 +11,7 @@ const counter = (state = initialState, action) => {
 		case REMOVE_ONE:
 			return {number: state.number - 1}
         default:
-            return {...state};
+            return Object.assign({}, state);
 	}
 };
 export default counter;
