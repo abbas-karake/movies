@@ -2,6 +2,8 @@ import React, {Component} from 'react';
 import Grid from '@material-ui/core/Grid';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import Formsy from 'formsy-react';
+import Drawer from '../components/common/drawer';
+import Typography from '@material-ui/core/Typography';
 import Auxi from '../components/hoc/auxi';
 import Search from '../components/common/search';
 import Card from '../components/common/card';
@@ -31,6 +33,10 @@ const validationErrors = {
 class Movies extends Component{
 
 	state = {
+		//// TRUE FOR DRAWER AND FALSE FOR MODAL ////
+		openInDrawer: true,
+		//// TRUE FOR DRAWER AND FALSE FOR MODAL ////
+
 		error: false,
 		errorMsg: "",
 
@@ -176,33 +182,104 @@ class Movies extends Component{
 
 
 
-				{/* one movie details part */}
+
+
+
+				{/* Movie details MODEL WAY */}
+				{!this.state.openInDrawer && 
 				<Modal
 					show={this.state.showModal}
 					onClose={() => this.setState({showModal: false})}
 					title={(this.state.loadedData !== null) && this.state.loadedData.Title}>
 
 					{this.state.loadedData === null && 
-						<Grid container justify="center" alignItems="center">
-							<CircularProgress color="secondary" />
-						</Grid>}
+					<Grid container justify="center" alignItems="center">
+						<CircularProgress color="secondary" />
+					</Grid>}
 
-					{this.state.loadedData !== null && 
-						<Auxi>
-							<Image
-								src={this.state.loadedData.Poster}
-								alt={this.state.loadedData.Title} />
-							<p><b>Year: </b> {this.state.loadedData.Year}</p>
-							<p><b>Rated: </b> {this.state.loadedData.Rated}</p>
-							<p><b>Released: </b> {this.state.loadedData.Released}</p>
-							<p><b>Runtime: </b> {this.state.loadedData.Runtime}</p>
-							<p><b>Genre: </b> {this.state.loadedData.Genre}</p>
-							<p><b>Plot: </b> {this.state.loadedData.Plot}</p>
-							<p><b>Awards: </b> {this.state.loadedData.Awards}</p>
-							<p><b>imdbRating: </b> {this.state.loadedData.imdbRating}</p>
-						</Auxi>}
-				</Modal>
-				{/* one movie details part */}
+		        	{this.state.loadedData !== null && 
+					<Auxi>
+				      	<Image
+							src={this.state.loadedData.Poster}
+							alt={this.state.loadedData.Title} />
+						<Typography variant="subtitle1" gutterBottom>
+						<b>Year: </b> {this.state.loadedData.Year}
+						</Typography>
+						<Typography variant="subtitle1" gutterBottom>
+							<b>Rated: </b> {this.state.loadedData.Rated}
+						</Typography>
+						<Typography variant="subtitle1" gutterBottom>
+							<b>Released: </b> {this.state.loadedData.Released}
+						</Typography>
+						<Typography variant="subtitle1" gutterBottom>
+							<b>Runtime: </b> {this.state.loadedData.Runtime}
+						</Typography>
+						<Typography variant="subtitle1" gutterBottom>
+							<b>Genre: </b> {this.state.loadedData.Genre}
+						</Typography>
+						<Typography variant="subtitle1" gutterBottom>
+							<b>Plot: </b> {this.state.loadedData.Plot}
+						</Typography>
+						<Typography variant="subtitle1" gutterBottom>
+							<b>Awards: </b> {this.state.loadedData.Awards}
+						</Typography>
+						<Typography variant="subtitle1" gutterBottom>
+							<b>imdbRating: </b> {this.state.loadedData.imdbRating}
+						</Typography>
+					</Auxi>}
+				</Modal>}
+				{/* Movie details MODEL WAY */}
+
+
+				{/* Movie details DRAWER WAY */}
+				{this.state.openInDrawer && 
+				<Drawer 
+					anchor="right"
+					open={this.state.showModal}
+					onClose={() => this.setState({showModal: false})}>
+
+					{this.state.loadedData === null && 
+					<Grid container justify="center" alignItems="center">
+						<CircularProgress color="secondary" />
+					</Grid>}
+
+		        	{this.state.loadedData !== null && 
+					<Auxi>
+						<Typography variant="h6" gutterBottom>
+				        {this.state.loadedData.Title}
+				      	</Typography>
+				      	<Image
+							src={this.state.loadedData.Poster}
+							alt={this.state.loadedData.Title} />
+						<Typography variant="subtitle1" gutterBottom>
+						<b>Year: </b> {this.state.loadedData.Year}
+						</Typography>
+						<Typography variant="subtitle1" gutterBottom>
+							<b>Rated: </b> {this.state.loadedData.Rated}
+						</Typography>
+						<Typography variant="subtitle1" gutterBottom>
+							<b>Released: </b> {this.state.loadedData.Released}
+						</Typography>
+						<Typography variant="subtitle1" gutterBottom>
+							<b>Runtime: </b> {this.state.loadedData.Runtime}
+						</Typography>
+						<Typography variant="subtitle1" gutterBottom>
+							<b>Genre: </b> {this.state.loadedData.Genre}
+						</Typography>
+						<Typography variant="subtitle1" gutterBottom>
+							<b>Plot: </b> {this.state.loadedData.Plot}
+						</Typography>
+						<Typography variant="subtitle1" gutterBottom>
+							<b>Awards: </b> {this.state.loadedData.Awards}
+						</Typography>
+						<Typography variant="subtitle1" gutterBottom>
+							<b>imdbRating: </b> {this.state.loadedData.imdbRating}
+						</Typography>
+					</Auxi>}
+
+				</Drawer>}
+				{/* Movie details DRAWER WAY */}
+
 
 
 			</Auxi>

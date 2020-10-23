@@ -52,7 +52,7 @@ class ButtonAppBar extends Component {
     }
     render() {
 
-    	let {classes, value, placeholder, onClick} = this.props;
+    	let {classes, value, placeholder} = this.props;
 
 		// An error message is passed only if the component is invalid
         let errorMessage = this.props.errorMessage;
@@ -70,7 +70,7 @@ class ButtonAppBar extends Component {
 				    className={classes.input}
 				    placeholder={placeholder}
 				/>
-				<IconButton type="submit" onClick={onClick} className={classes.iconButton} aria-label="search">
+				<IconButton type="submit" className={classes.iconButton} aria-label="search">
 					<SearchIcon />
 				</IconButton>
 			</Paper>

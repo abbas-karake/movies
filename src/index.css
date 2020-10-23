@@ -16,3 +16,11 @@ code {
 a{
 	text-decoration: none;
 }
+
+.MuiDrawer-paper::-webkit-scrollbar{
+	width: 1px;
+}
+
+.MuiDrawer-paper::-webkit-scrollbar-track {
+  background: #fff; 
+}
