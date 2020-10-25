@@ -3,7 +3,9 @@ import Grid from '@material-ui/core/Grid';
 import React from 'react';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
 
-export default (props) => {
+import PropTypes from 'prop-types';
+
+const DrawerComp = (props) => {
 	const sm = useMediaQuery('(max-width:576px)');
 	const md = useMediaQuery('(max-width:768px)');
 	const lg = useMediaQuery('(max-width:992px)');
@@ -33,3 +35,12 @@ export default (props) => {
 		</Drawer>
 	);
 }
+
+DrawerComp.propTypes = {
+    anchor: PropTypes.oneOf(['top', 'right', 'bottom', 'left']).isRequired,
+    open: PropTypes.bool.isRequired,
+    onClose: PropTypes.func.isRequired,
+    children: PropTypes.node
+}
+
+export default DrawerComp;

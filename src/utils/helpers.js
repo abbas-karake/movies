@@ -1,6 +1,7 @@
 import axios from './axios';
 
 
+
 export function sendRequest(data) {
 
 	// let params = {...data, apikey: "723257b5"}; // this will cause an error in edge and IE
@@ -35,3 +36,9 @@ export function sendRequest(data) {
         }
     });
 }
+
+
+export const findByTestAttr = (component, attr) => {
+    const wrapper = component.find(`[data-test='${attr}']`);
+    return wrapper;
+};

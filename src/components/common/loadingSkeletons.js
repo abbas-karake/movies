@@ -4,6 +4,7 @@ import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import Skeleton from '@material-ui/lab/Skeleton';
 import Grid from '@material-ui/core/Grid';
+import PropTypes from 'prop-types';
 
 const useStyles = makeStyles((theme) => ({
   media: {
@@ -13,7 +14,7 @@ const useStyles = makeStyles((theme) => ({
 
 
 
-export default (props) => {
+const LoadingSkeletonComp = (props) => {
   const classes = useStyles();
 
   let skels = [];
@@ -36,9 +37,13 @@ export default (props) => {
 
   return (
     <Grid container spacing={3}>
-
       {skels}
-
     </Grid>
   );
 }
+
+LoadingSkeletonComp.propTypes = {
+    number: PropTypes.number
+}
+
+export default LoadingSkeletonComp;

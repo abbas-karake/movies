@@ -2,8 +2,9 @@ import React from 'react';
 import Dialog from '@material-ui/core/Dialog';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogTitle from '@material-ui/core/DialogTitle';
+import PropTypes from 'prop-types';
 
-export default (props) => {
+const ModalComp = (props) => {
   return (
     <div>
       <Dialog
@@ -22,3 +23,12 @@ export default (props) => {
     </div>
   );
 }
+
+ModalComp.propTypes = {
+    title: PropTypes.string,
+    show: PropTypes.bool.isRequired,
+    onClose: PropTypes.func.isRequired,
+    children: PropTypes.node
+}
+
+export default ModalComp;

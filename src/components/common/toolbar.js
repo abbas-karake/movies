@@ -5,6 +5,7 @@ import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import { Link } from 'react-router-dom';
+import PropTypes from 'prop-types';
 
 const useStyles = makeStyles((theme) => ({
   	toolbar: {
@@ -19,7 +20,7 @@ const useStyles = makeStyles((theme) => ({
 	}
 }));
 
-export default function ButtonAppBar(props) {
+const ToolbarComp = (props) => {
   const classes = useStyles();
 
   return (
@@ -34,3 +35,9 @@ export default function ButtonAppBar(props) {
 	</AppBar>
   );
 }
+
+ToolbarComp.propTypes = {
+    path: PropTypes.string.isRequired
+}
+
+export default ToolbarComp;

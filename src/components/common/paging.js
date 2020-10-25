@@ -2,6 +2,7 @@ import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Pagination from '@material-ui/lab/Pagination';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
+import PropTypes from 'prop-types';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -12,7 +13,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function BasicPagination(props) {
+const PagingComp = (props) => {
   const classes = useStyles();
   const matches = useMediaQuery('(max-width:600px)');
   let sibling = matches ? 0 : 1;
@@ -28,3 +29,11 @@ export default function BasicPagination(props) {
     </div>
   );
 }
+
+PagingComp.propTypes = {
+    count: PropTypes.number.isRequired,
+    page: PropTypes.number.isRequired,
+    handleChange: PropTypes.func.isRequired
+}
+
+export default PagingComp;

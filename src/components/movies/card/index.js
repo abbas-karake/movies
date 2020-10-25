@@ -7,6 +7,8 @@ import Typography from '@material-ui/core/Typography';
 import Skeleton from '@material-ui/lab/Skeleton';
 import { makeStyles } from '@material-ui/core/styles';
 
+import PropTypes from 'prop-types';
+
 const useStyles = makeStyles((theme) => ({
   	root: {
 		height: '100%'
@@ -24,13 +26,18 @@ const useStyles = makeStyles((theme) => ({
 	}
 }));
 
-export default function ButtonAppBar(props) {
+
+const OneCard = (props) => {
   const classes = useStyles();
   let [imageLoaded, setImageLoaded] = useState(false);
-  let imageSrc = (props.src === "N/A") ? "/noimage.gif" : props.src;
+  let imageSrc = (!props.src || props.src === "N/A") ? "/noimage.gif" : props.src;
+  let title = props.title ? props.title : "";
+
+  if(!props.onClick)
+    return null;
 
   return (
-    <Card onClick={props.onClick} className={classes.root}>
+    <Card data-test="cardContainer" onClick={props.onClick} className={classes.root}>
       <CardActionArea className={classes.rootBotton}>
   		<Skeleton
   			style={imageLoaded ? {display: 'none'} : {}}
@@ -41,17 +48,25 @@ export default function ButtonAppBar(props) {
   			style={!imageLoaded ? {display: 'none'} : {}}
         onLoad={() => setImageLoaded(true)}
         component="img"
-        alt={props.title}
+        alt={title}
         className={classes.media}
         image={imageSrc}
-        title={props.title}
+        title={title}
         />
         <CardContent>
           <Typography gutterBottom variant="h5" component="h2">
-            {props.title}
+            {title}
           </Typography>
         </CardContent>
       </CardActionArea>
     </Card>
   );
 }
+
+OneCard.propTypes = {
+    src: PropTypes.string,
+    title: PropTypes.string,
+    onClick: PropTypes.func
+}
+
+export default OneCard;

@@ -2,16 +2,19 @@ import React, {Component} from 'react';
 import Grid from '@material-ui/core/Grid';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import Formsy from 'formsy-react';
-import Drawer from '../components/common/drawer';
 import Typography from '@material-ui/core/Typography';
+
 import Auxi from '../components/hoc/auxi';
-import Search from '../components/common/search';
-import Card from '../components/common/card';
+import Drawer from '../components/common/drawer';
 import Modal from '../components/common/modal';
 import Paging from '../components/common/paging';
 import Image from '../components/common/image';
 import Toaster from '../components/common/toaster';
 import LoadingSkeletons from '../components/common/loadingSkeletons';
+
+import Search from '../components/movies/search';
+import CardList from '../components/movies/cardList';
+
 import {sendRequest} from '../utils/helpers';
 
 
@@ -151,24 +154,16 @@ class Movies extends Component{
 
 
 				{this.state.loading && 
-				<LoadingSkeletons number="8" />}
+				<LoadingSkeletons number={8} />}
 
 
 				{/* data and paging part */}
 				{!this.state.loading && this.state.listData.length>0 &&
 					<Auxi>
-						<Grid container spacing={3}>
-							{this.state.listData.map(item => {
-								return (
-									<Grid key={item.imdbID} item xs={12} sm={6} md={4} lg={3}>
-										<Card 
-											onClick={() => this.loadDataHandler(item.imdbID)}
-											src={item.Poster}
-											title={item.Title} />
-									</Grid>
-								)
-							})}
-						</Grid>
+						<CardList
+							listData={this.state.listData}
+							cardClickFunc={(imdbID) => this.loadDataHandler(imdbID)} />
+
 						{this.state.pagingCount > 1 &&
 							<Grid container justify="center" alignItems="center">
 								<Paging

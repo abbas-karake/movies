@@ -3,6 +3,8 @@ import Skeleton from '@material-ui/lab/Skeleton';
 import Auxi from '../hoc/auxi';
 import { makeStyles } from '@material-ui/core/styles';
 
+import PropTypes from 'prop-types';
+
 const useStyles = makeStyles((theme) => ({
 	modalImage: {
 		width: '100%',
@@ -16,10 +18,10 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 
-export default (props) => {
+const ImageComp = (props) => {
 	const classes = useStyles();
 	let [imageLoaded, setImageLoaded] = useState(false);
-  	let imageSrc = (props.src === "N/A") ? "/noimage.gif" : props.src;
+  	let imageSrc = (!props.src || props.src === "N/A") ? "/noimage.gif" : props.src;
 
   	return (
   		<Auxi>
@@ -32,10 +34,18 @@ export default (props) => {
 	  			className={classes.modalImage}
 	  			style={!imageLoaded ? {display: 'none'} : {}}
 	        	onLoad={() => setImageLoaded(true)}
-				alt={props.alt}
+				alt={props.alt ? props.alt : ""}
 				height="140"
 				src={imageSrc}
 	        />
   		</Auxi>
   	);
 }
+
+ImageComp.propTypes = {
+    src: PropTypes.string,
+    alt: PropTypes.string
+}
+
+
+export default ImageComp;
